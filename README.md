@@ -1,6 +1,6 @@
 # brand-architecture
 
-![color palette v250104](https://raw.githubusercontent.com/circular-ruin-dsp/brand-architecture/refs/heads/main/color-palette-v250104.png)
+![color palette v250104](https://raw.githubusercontent.com/circular-ruin/brand-architecture/refs/heads/main/color-palette-v250104.png)
 
 ```css
 // v250104
