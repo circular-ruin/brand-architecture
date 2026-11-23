@@ -38,3 +38,7 @@ local copy, read single files with
 - Don't edit the docs as a side effect of work here. If a doc is wrong or
   missing something, tell the user. Fixes go through a PR to
   `circular-ruin/docs`.
+
+## Agent instructions file
+
+`AGENTS.md` is a symlink to this file, so every coding agent reads the same instructions. Edit `CLAUDE.md`, never the symlink.
