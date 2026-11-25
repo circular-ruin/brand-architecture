@@ -1,5 +1,11 @@
 # brand-architecture
 
+## Writing style
+
+Use the serial (Oxford) comma in everything written in this repo: UI copy,
+docs, code comments, commit messages, and PR descriptions. The full rules are
+in [`circular-ruin/docs` → copy-style.md](https://github.com/circular-ruin/docs/blob/main/copy-style.md).
+
 ## Cross-product docs
 
 Shared engineering and ops docs for Circular Ruin (signing, release pipelines,
