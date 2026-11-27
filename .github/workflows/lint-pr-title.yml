@@ -1,0 +1,56 @@
+name: Lint PR title
+
+# PRs are squash-merged with the PR title as the commit subject, so the title is
+# what lands on main. This file is identical in every Circular Ruin repo; the
+# convention is in circular-ruin/docs commit-conventions.md.
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions: {}
+
+jobs:
+  lint:
+    name: PR title
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Check the title is a Conventional Commit
+        env:
+          # Through env, never interpolated into the script: the title is user input.
+          TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          pattern='^(feat|fix|perf|refactor|revert|docs|style|test|build|ci|chore)(\([a-z0-9_/-]+\))?!?: [^ ].*$'
+          if [[ "$TITLE" =~ $pattern ]]; then
+            echo "OK: $TITLE"
+            exit 0
+          fi
+          echo "::error::PR title is not a Conventional Commit."
+          echo ""
+          echo "Got:      $TITLE"
+          echo "Expected: <type>(<scope>)?!?: <lowercase subject>"
+          echo ""
+          echo "Types:"
+          echo "  feat     new capability people can see or use"
+          echo "  fix      bug fix"
+          echo "  perf     performance"
+          echo "  refactor internal restructuring, no visible change"
+          echo "  revert   revert a prior commit"
+          echo "  docs     README, comments, CLAUDE.md"
+          echo "  style    formatting only"
+          echo "  test     tests, stories"
+          echo "  build    build config, dependencies"
+          echo "  ci       workflows"
+          echo "  chore    anything else"
+          echo ""
+          echo "Add '!' after the type or scope to mark a breaking change."
+          echo ""
+          echo "Examples:"
+          echo "  feat(ui): add Slider component"
+          echo "  fix: keep silent videos at the chosen length"
+          echo "  chore: bump @circular-ruin/artifact to 0.42.0"
+          echo "  refactor!: rename KnobVisual prop angle to normalizedValue"
+          echo ""
+          echo "See https://github.com/circular-ruin/docs/blob/main/commit-conventions.md"
+          exit 1
